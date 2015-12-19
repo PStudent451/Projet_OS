@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum {
+       FALSE,
+       TRUE
+} bool_t;
+
 // structure representing a block of memory
 // These blocks are linked together to form a list sorted by ascending addresses
 typedef struct Block
@@ -41,6 +46,9 @@ void allocate_First_Fit(const int length,const int idUser);
 // Function used to release a Block of memory
 void releaseMemoryArea(const int start_address, const int length);
 
+
+// Function which find and return the predecessor of the block having the first address equal to the first address parameter.
+Block* findPrec(const int start_address);
 
 // Function used to view the memory occupation
 void viewMemoryState();

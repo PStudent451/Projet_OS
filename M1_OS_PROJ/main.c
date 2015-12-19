@@ -49,18 +49,33 @@ int main()
     MEM_MANAGER.firstSegment = &s1;
 
     viewMemoryState(MEM_MANAGER);
-
     allocate_First_Fit(55,idUser);
-    //viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(45,idUser);
+    allocate_First_Fit(50,idUser);
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(2,idUser);
+    allocate_First_Fit(10,idUser);
     viewMemoryState(MEM_MANAGER);
+    allocate_First_Fit(5,idUser);
+    viewMemoryState(MEM_MANAGER);
+    allocate_First_Fit(5,idUser);
+    viewMemoryState(MEM_MANAGER);
+    /*
     allocate_First_Fit(25,idUser);
     viewMemoryState(MEM_MANAGER);
     allocate_First_Fit(10,idUser);
     allocate_First_Fit(10,idUser);
+    */
 
+    releaseMemoryArea(60,5);
+    viewMemoryState(MEM_MANAGER);
+    releaseMemoryArea(50,5);
+    viewMemoryState(MEM_MANAGER);
+    allocate_First_Fit(5,idUser);
+    viewMemoryState(MEM_MANAGER);
+    releaseMemoryArea(55,5);
+    viewMemoryState(MEM_MANAGER);
+    allocate_First_Fit(3,idUser);
+    viewMemoryState(MEM_MANAGER);
+    releaseMemoryArea(62,3);
     viewMemoryState(MEM_MANAGER);
     return 0;
 }
