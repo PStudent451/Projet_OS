@@ -1,90 +1,60 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "Memory.h"
 
 
 
 int main()
 {
+    initializeMemoryManager();
+    // Generation of the user's id
     srand(time(NULL));
     int idUser = rand()%(1000-1)+1;
 
-    MEM_MANAGER.length = 100;
+    do
+    {
+        system("CLS");
+        printf("\n\t Mini-Project on Memory Management by Paul Fryson and Richard Gruet \n");
+        unsigned int choice=0;
 
-    // definition of the Segments
-    Segment s1,s2,s3;
-    Block b1,b2,b3;
+        do
+        {
+            printf("\nWhat do you want to do ? \n\n");
+            printf("1. Allocation of a memory area\n");
+            printf("2. Release of a memory area\n");
+            printf("3. Viewing the memory occupation\n");
+            printf("4. Defragmentation of the memory\n");
+            printf("5. Quit\n\n");
+            printf("Your choice : ");
+            scanf("%u",&choice);
+        }
+        while(choice > 5 || choice == 0);
 
-    s1.length = 50;
-    s1.start_address = 0;
-    s1.nextSegment = &s2;
-    s1.firstBlock = &b1;
 
-    s2.length = 25;
-    s2.start_address = s1.length;
-    s2.nextSegment = &s3;
-    s2.firstBlock = &b2;
+        switch(choice)
+        {
+            case 1 :
+                allocation_menu(idUser);
+                pause();
+                break;
+            case 2 :
+                release_menu(idUser);
+                pause();
+                break;
+            case 3 :
+                viewMemoryState();
+                pause();
+                break;
+            case 4 :
+                defragmentation();
+                pause();
+                break;
+            case 5 :
+                return 0;
+            default :
+                return -1;
+        }
+    }
+    while(TRUE);
 
-    s3.length = 25;
-    s3.start_address = s2.start_address + s2.length;
-    s3.nextSegment = NULL;
-    s3.firstBlock = &b3;
 
-    b1.length = s1.length;
-    b1.id = -1;
-    b1.start_address = s1.start_address;
-    b1.nextBlock = NULL;
-
-    b2.length = s2.length;
-    b2.id = -1;
-    b2.start_address = s2.start_address;
-    b2.nextBlock = NULL;
-
-    b3.length = s3.length;
-    b3.id = -1;
-    b3.start_address = s3.start_address;
-    b3.nextBlock = NULL;
-
-    MEM_MANAGER.firstSegment = &s1;
-
-    viewMemoryState(MEM_MANAGER);
-    allocate_Worst_Fit(55,idUser);
-    allocate_Worst_Fit(20,idUser);
-    viewMemoryState(MEM_MANAGER);
-    allocate_Worst_Fit(10,idUser);
-    viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(30,10,idUser);
-    viewMemoryState(MEM_MANAGER);
-    printf("defragmentation : \n");
-    defragmentation();
-    viewMemoryState(MEM_MANAGER);
-    allocate_Worst_Fit(5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    allocate_Worst_Fit(5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    /*
-    allocate_First_Fit(25,idUser);
-    viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(10,idUser);
-    allocate_First_Fit(10,idUser);
-    */
-
-    releaseMemoryArea(20,5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(25,5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(55,5,idUser);
-    viewMemoryState(MEM_MANAGER);
-    allocate_Best_Fit(3,idUser);
-    viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(62,3,idUser);
-    viewMemoryState(MEM_MANAGER);
-
-    printf("defragmentation : \n");
-    defragmentation();
-    viewMemoryState(MEM_MANAGER);
     return 0;
 }
