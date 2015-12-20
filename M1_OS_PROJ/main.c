@@ -12,7 +12,7 @@ int main()
 
     MEM_MANAGER.length = 100;
 
-    // definition of the blocks
+    // definition of the Segments
     Segment s1,s2,s3;
     Block b1,b2,b3;
 
@@ -49,14 +49,19 @@ int main()
     MEM_MANAGER.firstSegment = &s1;
 
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(55,idUser);
-    allocate_First_Fit(50,idUser);
+    allocate_Worst_Fit(55,idUser);
+    allocate_Worst_Fit(20,idUser);
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(10,idUser);
+    allocate_Worst_Fit(10,idUser);
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(5,idUser);
+    releaseMemoryArea(30,10,idUser);
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(5,idUser);
+    printf("defragmentation : \n");
+    defragmentation();
+    viewMemoryState(MEM_MANAGER);
+    allocate_Worst_Fit(5,idUser);
+    viewMemoryState(MEM_MANAGER);
+    allocate_Worst_Fit(5,idUser);
     viewMemoryState(MEM_MANAGER);
     /*
     allocate_First_Fit(25,idUser);
@@ -65,17 +70,21 @@ int main()
     allocate_First_Fit(10,idUser);
     */
 
-    releaseMemoryArea(60,5);
+    releaseMemoryArea(20,5,idUser);
     viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(50,5);
+    releaseMemoryArea(25,5,idUser);
     viewMemoryState(MEM_MANAGER);
     allocate_First_Fit(5,idUser);
     viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(55,5);
+    releaseMemoryArea(55,5,idUser);
     viewMemoryState(MEM_MANAGER);
-    allocate_First_Fit(3,idUser);
+    allocate_Best_Fit(3,idUser);
     viewMemoryState(MEM_MANAGER);
-    releaseMemoryArea(62,3);
+    releaseMemoryArea(62,3,idUser);
+    viewMemoryState(MEM_MANAGER);
+
+    printf("defragmentation : \n");
+    defragmentation();
     viewMemoryState(MEM_MANAGER);
     return 0;
 }

@@ -4,10 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef enum {
        FALSE,
        TRUE
 } bool_t;
+
 
 // structure representing a block of memory
 // These blocks are linked together to form a list sorted by ascending addresses
@@ -19,6 +21,7 @@ typedef struct Block
     struct Block* nextBlock;
 }Block;
 
+
 // structure representing a segment
 // These blocks are linked together to form a list sorted by ascending addresses
 typedef struct Segment
@@ -28,6 +31,7 @@ typedef struct Segment
     struct Segment* nextSegment;
     Block* firstBlock;     // Pointer to the first Block of the block's chained list
 }Segment;
+
 
 // structure managing the memory blocks
 typedef struct Memory_Manager
@@ -43,17 +47,28 @@ Memory_Manager MEM_MANAGER;
 void allocate_First_Fit(const int length,const int idUser);
 
 
+// Function used to allocate a Block of memory using best-fit algorithm (the parameter length is the size of the block going to be allocated)
+void allocate_Best_Fit(const int length,const int idUser);
+
+
+// Function used to allocate a Block of memory using worst-fit algorithm (the parameter length is the size of the block going to be allocated)
+void allocate_Worst_Fit(const int length,const int idUser);
+
+
 // Function used to release a Block of memory
-void releaseMemoryArea(const int start_address, const int length);
+void releaseMemoryArea(const int start_address, const int lengthvoid, const int idUser);
 
 
 // Function which find and return the predecessor of the block having the first address equal to the first address parameter.
 Block* findPrec(const int start_address);
 
+
 // Function used to view the memory occupation
 void viewMemoryState();
 
+
 // Function used to defragmented the memory
 void defragmentation();
+
 
 #endif // MEMORY_H_INCLUDED
